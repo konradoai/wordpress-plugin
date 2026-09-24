@@ -1,0 +1,4 @@
+# Keep GitHub's "Download ZIP" (archive/refs/heads/main.zip) down to the plugin itself.
+/.github         export-ignore
+/.gitattributes  export-ignore
+/README.md       export-ignore
