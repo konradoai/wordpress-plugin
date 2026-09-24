@@ -1,6 +1,9 @@
 <div align="center">
 
-<img src=".github/assets/konrado-logo-banner.svg" alt="Konrado.AI" width="300">
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset=".github/assets/konrado-logo-on-dark.svg">
+  <img src=".github/assets/konrado-logo-on-light.svg" alt="Konrado.AI" width="260">
+</picture>
 
 <h1>Konrado AI for WordPress</h1>
 
