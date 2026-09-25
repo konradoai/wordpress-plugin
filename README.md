@@ -16,7 +16,7 @@ Put your Konrado AI support agent on every page of your WordPress site. Paste on
 <a href="#settings">Settings</a> ·
 <a href="#recognize-logged-in-customers"><b>Logged-in customers</b></a> ·
 <a href="#faq">FAQ</a> ·
-<a href="https://docs.konrado.ai"><b>Docs</b></a>
+<a href="https://docs.konrado.ai/integrations/wordpress"><b>Docs</b></a>
 </p>
 
 <p>
@@ -59,6 +59,8 @@ Go to **Plugins > Add New Plugin > Upload Plugin**, choose the ZIP, then click *
 Go to **Settings > Konrado AI**, paste the Widget ID from the Install page (it starts with `wgt_`) and click **Save Changes**.
 
 What you should see: the chat button in the bottom corner of your site. If it does not appear, check that the chat is turned on under **Live chat > Status** in Konrado.
+
+The full guide, with screenshots of every step, is at **[docs.konrado.ai/integrations/wordpress](https://docs.konrado.ai/integrations/wordpress)**.
 
 ---
 
