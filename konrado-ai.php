@@ -1,7 +1,6 @@
 <?php
 /**
  * Plugin Name:       Konrado AI
- * Plugin URI:        https://konrado.ai
  * Description:       Adds your Konrado AI support chat to every page of your site. Paste your Widget ID under Settings > Konrado AI and you're live.
  * Version:           1.0.0
  * Requires at least: 5.7
