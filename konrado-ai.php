@@ -32,6 +32,7 @@ const KONRADO_AI_OPTION_WIDGET_ID = 'konrado_ai_widget_id';
 const KONRADO_AI_OPTION_IDENTIFY = 'konrado_ai_identify_users';
 const KONRADO_AI_OPTION_SECRET = 'konrado_ai_signing_secret';
 const KONRADO_AI_SETTINGS_PAGE = 'konrado-ai';
+const KONRADO_AI_DOCS_URL = 'https://docs.konrado.ai/integrations/wordpress';
 
 function konrado_ai_host()
 {
@@ -59,6 +60,7 @@ add_action('admin_menu', 'konrado_ai_add_settings_page');
 add_action('admin_notices', 'konrado_ai_missing_widget_id_notice');
 add_action('admin_enqueue_scripts', 'konrado_ai_settings_script');
 add_filter('plugin_action_links_' . plugin_basename(__FILE__), 'konrado_ai_action_links');
+add_filter('plugin_row_meta', 'konrado_ai_row_meta', 10, 2);
 
 function konrado_ai_register_settings()
 {
@@ -262,6 +264,24 @@ function konrado_ai_action_links($links)
         esc_url(admin_url('options-general.php?page=' . KONRADO_AI_SETTINGS_PAGE)),
         esc_html__('Settings', 'konrado-ai')
     ));
+
+    return $links;
+}
+
+/**
+ * Adds "Docs" to the plugin's row on the Plugins screen, after "Visit plugin site".
+ */
+function konrado_ai_row_meta($links, $file)
+{
+    if ($file !== plugin_basename(__FILE__)) {
+        return $links;
+    }
+
+    $links[] = sprintf(
+        '<a href="%s" target="_blank" rel="noopener noreferrer">%s</a>',
+        esc_url(KONRADO_AI_DOCS_URL),
+        esc_html__('Docs', 'konrado-ai')
+    );
 
     return $links;
 }
