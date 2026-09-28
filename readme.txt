@@ -4,7 +4,7 @@ Tags: chatbot, ai, customer support, live chat, chat
 Requires at least: 5.7
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 1.0.0
+Stable tag: 1.0.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -56,6 +56,9 @@ Identity tokens are valid for five minutes and can be used once, so pages served
 Check that the Widget ID is saved under Settings > Konrado AI, that the channel is turned on in the Konrado dashboard, and - if you restricted the chat to allowed domains - that your site's domain is on the list.
 
 == Changelog ==
+
+= 1.0.1 =
+* Fix: the chat did not appear on sites where a speed plugin (LiteSpeed Cache, Autoptimize, Cloudflare Rocket Loader) combines JavaScript files. The chat script now asks these plugins to leave it alone. If your site uses a page cache, purge it after updating.
 
 = 1.0.0 =
 * First release.

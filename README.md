@@ -20,7 +20,7 @@ Put your Konrado AI support agent on every page of your WordPress site. Paste on
 </p>
 
 <p>
-<a href="https://github.com/konradoai/wordpress-plugin/archive/refs/heads/main.zip"><img src="https://img.shields.io/badge/version-1.0.0-10D0A1" alt="Version 1.0.0"></a>
+<a href="https://github.com/konradoai/wordpress-plugin/archive/refs/heads/main.zip"><img src="https://img.shields.io/badge/version-1.0.1-10D0A1" alt="Version 1.0.1"></a>
 <a href="#requirements"><img src="https://img.shields.io/badge/WordPress-5.7%2B-21759B?logo=wordpress&logoColor=white" alt="WordPress 5.7+"></a>
 <a href="#requirements"><img src="https://img.shields.io/badge/PHP-7.4%2B-777BB4?logo=php&logoColor=white" alt="PHP 7.4+"></a>
 <a href="#license"><img src="https://img.shields.io/badge/license-GPLv2%2B-0b7285" alt="GPLv2 or later"></a>
