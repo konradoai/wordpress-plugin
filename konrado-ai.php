@@ -2,7 +2,7 @@
 /**
  * Plugin Name:       Konrado AI
  * Description:       Adds your Konrado AI support chat to every page of your site. Paste your Widget ID under Settings > Konrado AI and you're live.
- * Version:           1.0.0
+ * Version:           1.0.1
  * Requires at least: 5.7
  * Requires PHP:      7.4
  * Author:            Konrado.ai
@@ -227,7 +227,7 @@ function konrado_ai_settings_script($hook_suffix)
         return;
     }
 
-    wp_register_script('konrado-ai-settings', false, [], '1.0.0', true);
+    wp_register_script('konrado-ai-settings', false, [], '1.0.1', true);
     wp_enqueue_script('konrado-ai-settings');
     wp_add_inline_script('konrado-ai-settings', sprintf(
         "document.addEventListener('DOMContentLoaded', function () {
@@ -303,6 +303,12 @@ function konrado_ai_print_loader()
         'async'                  => true,
         'src'                    => konrado_ai_host() . '/website-chat/v1/loader.js',
         'data-konrado-widget-id' => $widget_id,
+        // The loader finds Konrado from its own URL and reads the Widget ID from this tag. A
+        // speed plugin that copies it into a combined file on the site's own domain breaks both,
+        // so these ask each optimizer to leave the tag as it is.
+        'data-no-optimize'       => '1',     // LiteSpeed Cache; must be non-empty
+        'data-cfasync'           => 'false', // Cloudflare Rocket Loader, also LiteSpeed Cache
+        'data-noptimize'         => true,    // Autoptimize
     ];
 
     // Signed-out visitors, and sites without a secret, get the plain anonymous tag.
