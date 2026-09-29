@@ -1,8 +1,8 @@
 <?php
 /**
  * Plugin Name:       Konrado AI
- * Description:       Adds your Konrado AI support chat to every page of your site. Paste your Widget ID under Settings > Konrado AI and you're live.
- * Version:           1.0.1
+ * Description:       Adds your Konrado AI support chat to every page of your site. Paste your Chat ID under Settings > Konrado AI and you're live.
+ * Version:           1.0.2
  * Requires at least: 5.7
  * Requires PHP:      7.4
  * Author:            Konrado.ai
@@ -20,7 +20,7 @@ if (!defined('ABSPATH')) {
 // defining KONRADO_AI_HOST in wp-config.php, or with the `konrado_ai_host` filter.
 const KONRADO_AI_DEFAULT_HOST = 'https://app.konrado.ai';
 
-// The Widget ID is the website-chat channel's public id - the only thing the loader needs.
+// The Chat ID is the website-chat channel's public id - the only thing the loader needs.
 const KONRADO_AI_WIDGET_ID_PATTERN = '/^wgt_[0-9a-f]{32}$/';
 
 // Identity tokens are redeemed within seconds of page load and are single-use, so five
@@ -83,7 +83,7 @@ function konrado_ai_register_settings()
 
     add_settings_field(
         KONRADO_AI_OPTION_WIDGET_ID,
-        __('Widget ID', 'konrado-ai'),
+        __('Chat ID', 'konrado-ai'),
         'konrado_ai_render_widget_id_field',
         KONRADO_AI_SETTINGS_PAGE,
         'konrado_ai_main',
@@ -127,7 +127,7 @@ function konrado_ai_sanitize_widget_id($value)
         add_settings_error(
             KONRADO_AI_OPTION_WIDGET_ID,
             'konrado_ai_invalid_widget_id',
-            __('That is not a valid Widget ID. It starts with "wgt_" - copy it from your Konrado dashboard.', 'konrado-ai')
+            __('That is not a valid Chat ID. It starts with "wgt_" - copy it from your Konrado dashboard.', 'konrado-ai')
         );
     }
 
@@ -165,7 +165,7 @@ function konrado_ai_render_settings_page()
     <div class="wrap">
         <h1><?php echo esc_html(get_admin_page_title()); ?></h1>
         <p>
-            <?php esc_html_e('Your Widget ID is in the Konrado dashboard: open your agent, go to the website chat channel, then Install, and choose WordPress.', 'konrado-ai'); ?>
+            <?php esc_html_e('Your Chat ID is in the Konrado dashboard: open your agent, go to the website chat channel, then Install, and choose WordPress.', 'konrado-ai'); ?>
         </p>
         <?php if (konrado_ai_identifies_users() && get_option(KONRADO_AI_OPTION_SECRET, '') === '') : ?>
             <div class="notice notice-warning inline">
@@ -227,7 +227,7 @@ function konrado_ai_settings_script($hook_suffix)
         return;
     }
 
-    wp_register_script('konrado-ai-settings', false, [], '1.0.1', true);
+    wp_register_script('konrado-ai-settings', false, [], '1.0.2', true);
     wp_enqueue_script('konrado-ai-settings');
     wp_add_inline_script('konrado-ai-settings', sprintf(
         "document.addEventListener('DOMContentLoaded', function () {
@@ -250,7 +250,7 @@ function konrado_ai_missing_widget_id_notice()
 
     printf(
         '<div class="notice notice-warning"><p>%s <a href="%s">%s</a></p></div>',
-        esc_html__('Konrado AI is active, but the chat will not appear until you add your Widget ID.', 'konrado-ai'),
+        esc_html__('Konrado AI is active, but the chat will not appear until you add your Chat ID.', 'konrado-ai'),
         esc_url(admin_url('options-general.php?page=' . KONRADO_AI_SETTINGS_PAGE)),
         esc_html__('Add it now', 'konrado-ai')
     );
@@ -303,7 +303,7 @@ function konrado_ai_print_loader()
         'async'                  => true,
         'src'                    => konrado_ai_host() . '/website-chat/v1/loader.js',
         'data-konrado-widget-id' => $widget_id,
-        // The loader finds Konrado from its own URL and reads the Widget ID from this tag. A
+        // The loader finds Konrado from its own URL and reads the Chat ID from this tag. A
         // speed plugin that copies it into a combined file on the site's own domain breaks both,
         // so these ask each optimizer to leave the tag as it is.
         'data-no-optimize'       => '1',     // LiteSpeed Cache; must be non-empty
