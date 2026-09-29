@@ -4,7 +4,7 @@ Tags: chatbot, ai, customer support, live chat, chat
 Requires at least: 5.7
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 1.0.1
+Stable tag: 1.0.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -14,7 +14,7 @@ Add your Konrado AI support agent to every page of your WordPress site. No code 
 
 Konrado AI answers your customers' questions around the clock, using your knowledge base, your policies and your integrations. This plugin puts the Konrado chat on your WordPress site.
 
-* One setting: paste your Widget ID and save.
+* One setting: paste your Chat ID and save.
 * The chat looks and behaves the way you configured it in the Konrado dashboard - colors, greeting, languages and position are managed there, not in WordPress.
 * Optional: tick "Recognize customers who are logged in to WordPress" and add your signing secret, and the agent knows which logged-in visitor it is talking to (for example your WooCommerce customers).
 
@@ -23,15 +23,15 @@ This plugin loads the chat from Konrado's servers (app.konrado.ai). The chat pro
 == Installation ==
 
 1. In WordPress, go to Plugins > Add New Plugin > Upload Plugin, choose the konrado-ai-wordpress.zip file you downloaded from the Konrado dashboard, then click Install Now and Activate.
-2. In the Konrado dashboard, open your agent's website chat channel, go to Install and choose WordPress. Copy your Widget ID (it starts with wgt_).
-3. In WordPress, go to Settings > Konrado AI, paste the Widget ID and click Save Changes.
+2. In the Konrado dashboard, open your agent's website chat channel, go to Install and choose WordPress. Copy your Chat ID (it starts with wgt_).
+3. In WordPress, go to Settings > Konrado AI, paste the Chat ID and click Save Changes.
 4. Open your site. The chat button appears in the bottom corner.
 
 To turn the chat on or off, or to change how it looks, use the Konrado dashboard. You never need to edit your theme.
 
 == Frequently Asked Questions ==
 
-= Where do I find my Widget ID? =
+= Where do I find my Chat ID? =
 
 In the Konrado dashboard: open your agent, go to the website chat channel, then Install, and choose WordPress.
 
@@ -53,9 +53,12 @@ Identity tokens are valid for five minutes and can be used once, so pages served
 
 = The chat does not appear. =
 
-Check that the Widget ID is saved under Settings > Konrado AI, that the channel is turned on in the Konrado dashboard, and - if you restricted the chat to allowed domains - that your site's domain is on the list.
+Check that the Chat ID is saved under Settings > Konrado AI, that the channel is turned on in the Konrado dashboard, and - if you restricted the chat to allowed domains - that your site's domain is on the list.
 
 == Changelog ==
+
+= 1.0.2 =
+* The setting is now called Chat ID, the name the Konrado dashboard uses. Your saved ID keeps working, nothing to change.
 
 = 1.0.1 =
 * Fix: the chat did not appear on sites where a speed plugin (LiteSpeed Cache, Autoptimize, Cloudflare Rocket Loader) combines JavaScript files. The chat script now asks these plugins to leave it alone. If your site uses a page cache, purge it after updating.
