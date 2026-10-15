@@ -4,7 +4,7 @@ Tags: chatbot, ai, customer support, live chat, chat
 Requires at least: 5.7
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 1.0.2
+Stable tag: 1.0.3
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -56,6 +56,9 @@ Identity tokens are valid for five minutes and can be used once, so pages served
 Check that the Chat ID is saved under Settings > Konrado AI, that the channel is turned on in the Konrado dashboard, and - if you restricted the chat to allowed domains - that your site's domain is on the list.
 
 == Changelog ==
+
+= 1.0.3 =
+* Fix: with "Recognize customers who are logged in to WordPress" on, the agent could tell a logged-in visitor they had no unpaid invoices, and a ticket they asked for could fail to open. The agent now knows such a visitor by name and e-mail only, and tickets open under that name and e-mail. Sites that return a help-desk client id from the `konrado_ai_customer_id` filter work as before.
 
 = 1.0.2 =
 * The setting is now called Chat ID, the name the Konrado dashboard uses. Your saved ID keeps working, nothing to change.
