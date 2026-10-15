@@ -2,7 +2,7 @@
 /**
  * Plugin Name:       Konrado AI
  * Description:       Adds your Konrado AI support chat to every page of your site. Paste your Chat ID under Settings > Konrado AI and you're live.
- * Version:           1.0.2
+ * Version:           1.0.3
  * Requires at least: 5.7
  * Requires PHP:      7.4
  * Author:            Konrado.ai
@@ -227,7 +227,7 @@ function konrado_ai_settings_script($hook_suffix)
         return;
     }
 
-    wp_register_script('konrado-ai-settings', false, [], '1.0.2', true);
+    wp_register_script('konrado-ai-settings', false, [], '1.0.3', true);
     wp_enqueue_script('konrado-ai-settings');
     wp_add_inline_script('konrado-ai-settings', sprintf(
         "document.addEventListener('DOMContentLoaded', function () {
@@ -342,10 +342,12 @@ function konrado_ai_identity_token()
     // Konrado reads `sub` as the customer's id in the organization's help desk (WHMCS and
     // the like) and gives the agent read-only access to THAT client's invoices, services and
     // tickets. A WordPress user id is not a help-desk id - user 5 here is somebody else's
-    // client 5 there - so it is sent prefixed, matching no help-desk client, and the agent
-    // only learns the name and e-mail. A site whose WordPress users map to help-desk clients
-    // returns the real client id from the `konrado_ai_customer_id` filter.
-    $customer_id = (string) apply_filters('konrado_ai_customer_id', 'wp:' . $user->ID, $user);
+    // client 5 there - so the default id is signed with `platform: wordpress`. No help desk
+    // is called that, so Konrado matches it to no client and the agent only learns the name
+    // and e-mail. A site whose WordPress users map to help-desk clients returns the real
+    // client id from the `konrado_ai_customer_id` filter, signed without `platform`.
+    $default_id = 'wp:' . $user->ID;
+    $customer_id = (string) apply_filters('konrado_ai_customer_id', $default_id, $user);
 
     if ($customer_id === '') {
         return '';
@@ -353,12 +355,13 @@ function konrado_ai_identity_token()
 
     $now = time();
     $claims = array_filter([
-        'sub'   => $customer_id,                                           // your id for this customer
-        'email' => $user->user_email !== '' ? $user->user_email : null,    // shown to the agent
-        'name'  => $user->display_name !== '' ? $user->display_name : null, // shown to the agent
-        'iat'   => $now,                                                   // required
-        'exp'   => $now + KONRADO_AI_TOKEN_TTL,                            // redeemed on page load
-        'jti'   => bin2hex(random_bytes(16)),                              // random per render
+        'sub'      => $customer_id,                                           // your id for this customer
+        'platform' => $customer_id === $default_id ? 'wordpress' : null,      // the system `sub` is from
+        'email'    => $user->user_email !== '' ? $user->user_email : null,    // shown to the agent
+        'name'     => $user->display_name !== '' ? $user->display_name : null, // shown to the agent
+        'iat'      => $now,                                                   // required
+        'exp'      => $now + KONRADO_AI_TOKEN_TTL,                            // redeemed on page load
+        'jti'      => bin2hex(random_bytes(16)),                              // random per render
     ], static function ($value) {
         return $value !== null;
     });
